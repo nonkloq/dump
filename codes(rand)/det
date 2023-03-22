@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+import random 
+def det(mat, m):
+    """
+    Return Determinante of a square matrix
+    when m = 2: 1;when m = 3; 1 + 1;1 + 1;1 + 1 = 6;
+    when m = 4; 1 + 6;1 + 6;1 + 6;1 + 6 = 28;when m = 5; 1 + 28;1 + 28;1 + 28;1 + 28; 1 + 28 = 145
+    So, when m > 2; T(m) = m * (1 + T(m-1))
+ 
+    Best Case: O(1) when m == 2
+    Worst And Average Case: T(m*(1+T(m-1))) => O(m**m-1) aprox idk wrong
+    """
+    if m == 2:
+        return (mat[0][0]*mat[1][1]) - (mat[0][1]*mat[1][0])
+    res = 0
+    sign = 1
+    for i in range(m):
+        res += sign*(mat[0][i]*(det(submat(mat,i,m),m-1)))
+        sign *= -1
+    return res
+def submat(mat,d,m):
+    """
+    Subfunction to return The Submatrix of matrix without the first row and given dimension(d) values
+    time complexity T(m-1)
+    list slice O(k)
+    list concatenation O(k+n)
+    overall time complexity O(m)
+    """
+    return [mat[i][:d]+mat[i][d+1:] for i in range(1,m)]  
+
+def T(m):
+    if m == 2: return 1
+    return m*(1+T(m-1))
+
+
+# def determinant(matrix, mul):
+#     width = len(matrix)
+#     if width == 1:
+#         return mul * matrix[0][0]
+#     else:
+#         sign = -1
+#         answer = 0
+#         for i in range(width):
+#             m = []
+#             for j in range(1, width):
+#                 buff = []
+#                 for k in range(width):
+#                     if k != i:
+#                         buff += [matrix[j][k]]
+#                 m += [buff]
+#             sign *= -1
+#             answer += mul * determinant(m, sign * matrix[0][i])
+#     return answer
+
+if __name__ == "__main__":
+    try: 
+        size = int(input("Enter Size Of The Square Matrix: "))
+        extopt = input("Enter b to random binary matrix: ")
+        if 'b' == extopt:
+            A = [[random.randint(0,1) for _ in range(size)]for _ in range(size)]
+        else:
+            A = [[int(input(f"A[{i+1}][{j+1}]: ")) for j in range(size)] for i in range(size)]
+        for r in A:
+            for x in r:
+                print(x,end=" ")
+            print()
+        print("Determinant: ",det(A,size))
+        print("Time Complexity: ",T(size))
+    except KeyboardInterrupt:
+        print("KeyboardInterrupt ~")

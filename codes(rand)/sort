@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+from sys import argv
+from random import randint
+
+argv = list(map(int,argv[1:]))
+Len = len(argv)
+# Bubble Sort
+# for i in range(Len-1):
+#   for j in range(Len-1-i):
+#        if argv[j] > argv[j+1]:
+#            argv[j], argv[j+1] = argv[j+1], argv[j]
+
+# Selection sort
+# for i in range(Len):
+#     min_idx = i
+#     for j in range(i+1,Len):
+#         if argv[min_idx] > argv[j]:
+#               min_idx = j
+#    argv[min_idx], argv[i] = argv[i], argv[min_idx]
+
+# Insertion Sort
+# for i in range(Len):
+#    cur = argv.pop(i)
+#    j = i-1
+#    while j >= 0 and argv[j] > cur:
+#        j -= 1
+#    argv.insert(j+1,cur)
+
+# Merge Sort
+def merge_sort(nums):
+    Len = len(nums)
+    if Len <= 1:
+        return nums
+    mid = Len//2
+    return merge(merge_sort(nums[:mid])+merge_sort(nums[mid:]))
+
+def merge(nums):
+    # i = j= 0
+    # merged = []
+    # while i<len(nums1) and j < len(nums2):
+    #     if nums1[i] > nums2[j]:
+    #         merged += [nums2[j]]
+    #         j += 1
+    #     else:
+    #         merged += [nums1[i]]
+    #         i += 1
+    # return merged + nums1[i:] + nums2[j:]
+    Len = len(nums)
+    for i in range(Len):
+        cur = nums.pop(i)
+        j = i-1
+        while j >= 0 and nums[j] > cur:
+            j -= 1
+        nums.insert(j+1,cur)
+    return nums
+
+def quick_sort(nums,s,e):
+    if s < e:
+        pivot = partition(nums,s,e)
+        quick_sort(nums,s,pivot-1)
+        quick_sort(nums,pivot+1,e)
+    
+def partition(nums,s,e):
+    pivot = randint(s,e)
+    nums[e],nums[pivot] = nums[pivot],nums[e]
+    pivot, e = e,e-1
+    while s < e:
+        if nums[s] <= nums[pivot]: s+=1 
+        elif nums[e] >nums[pivot]: e-=1 
+        else: nums[s],nums[e] = nums[e],nums[s]
+    if nums[s] > nums[pivot]:
+        nums[s],nums[pivot] = nums[pivot],nums[s]
+        pivot = s 
+    return pivot 
+
+def quick_sort_mid(nums,s,e):
+    if s>=e: return 
+    mid = (s+e)//2 
+    pivot = nums[mid]
+    i,j = s,e 
+    while i <j:
+        if nums[i]>=pivot and nums[j]<=pivot:
+            nums[i],nums[j] = nums[j],nums[i]
+            j-=1 
+            i+=1 
+        else: i+=1 
+    quick_sort_mid(nums,s,mid)
+    quick_sort_mid(nums,mid+1,e)
+quick_sort_mid(argv,0,Len-1)
+print(argv)
