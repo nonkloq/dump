@@ -73,18 +73,5 @@ def partition(nums,s,e):
         pivot = s 
     return pivot 
 
-def quick_sort_mid(nums,s,e):
-    if s>=e: return 
-    mid = (s+e)//2 
-    pivot = nums[mid]
-    i,j = s,e 
-    while i <j:
-        if nums[i]>=pivot and nums[j]<=pivot:
-            nums[i],nums[j] = nums[j],nums[i]
-            j-=1 
-            i+=1 
-        else: i+=1 
-    quick_sort_mid(nums,s,mid)
-    quick_sort_mid(nums,mid+1,e)
-quick_sort_mid(argv,0,Len-1)
+quick_sort(argv,0,Len-1)
 print(argv)
