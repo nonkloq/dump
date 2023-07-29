@@ -9,7 +9,7 @@ Usage:
     Lock Frame to see animation (y), or see every frame separately (n), Default n.
     Set Frame Interval in seconds, Input type Floating Point Number (No Defaults).
     Number of Disks to be used, Input type Integer (No Default, Recommended range limit [1-10] no upper bound restriction)
-    Custom A(Start) to B(Destination), Input type Integer, Available Slots A(1),B(2) and C(3), Default A(1) to B(3).
+    Custom Start to Destination, Input type Integer, Available Slots A(1),B(2) and C(3), Default A(1) to C(3).
 
     Quit, Default n, y to quit.
 """
