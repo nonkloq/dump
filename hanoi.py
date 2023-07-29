@@ -1,6 +1,18 @@
-#!/usr/bin/env python
 from os import system 
 from time import sleep, time 
+
+intro = """
+Author: github.com/nonkloq (satz)
+Tower of Hanoi Algorithm Visualization in Terminal using ASCII
+
+Usage:
+    Lock Frame to see animation (y), or see every frame separately (n), Default n.
+    Set Frame Interval in seconds, Input type Floating Point Number (No Defaults).
+    Number of Disks to be used, Input type Integer (No Default, Recommended range limit [1-10] no upper bound restriction)
+    Custom A(Start) to B(Destination), Input type Integer, Available Slots A(1),B(2) and C(3), Default A(1) to B(3).
+
+    Quit, Default n, y to quit.
+"""
 
 class Colors:
     __FG = {"g1":30,"r":31,"b1":32,"b2":33,"p1":34,"b3":35,"b4":36,"w1":37,"g2":90,"o":91,"b5":92,"y":93,"b6":94,"p2":95,"b6":96,"w2":97,"n":0}
@@ -96,7 +108,8 @@ if __name__ == "__main__":
     from os import name 
     if name == "posix": CLEAR = "clear"
     else: CLEAR = "cls"
-
+    print(intro)
+    
     hanoi = TowerofHanoi()
     res = ""
     try:
@@ -104,7 +117,10 @@ if __name__ == "__main__":
             hanoi.single_frame = True if input("Lock in Single Frame?(y/[n]): ") == "y" else False 
             hanoi.frame_interval = float(input("Frame Interval: "))
             N = int(input("# of disks: "))
-            if input("Custom A to B?(y/[n]): ") == "y": a,b = int(input("A: ")),int(input("B: "))
+            if N<=0: 
+                print("Invalid Number")
+                exit(1)
+            if input("Custom Start to Dest?(y/[n]): ") == "y": a,b = int(input("Start: ")),int(input("Dest: "))
             else: a,b = 1,3
             hanoi(N,a,b)
             res = input("wanna a Quit? (y/[n]): ")
