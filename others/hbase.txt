@@ -1,0 +1,50 @@
+wget https://dlcdn.apache.org/hbase/2.4.17/hbase-2.4.17-bin.tar.gz
+tar xzf hbase-2.4.17-bin.tar.gz
+
+nano ~/.bashrc
+
+export HBASE_HOME=/home/amrit/hbase-1.7.2-bin/hbase-1.7.2
+export PATH=$PATH:$HBASE_HOME/bin
+  
+source ~/.bashrc
+
+mkdir zookeeper
+mkdir hbase
+sudo chmod 777 zookeeper/
+sudo chmod 777 hbase
+
+nano hbase-2.4.17/conf/hbase-site.xml
+<property>
+    <name>hbase.cluster.distributed</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hbase.tmp.dir</name>
+    <value>./tmp</value>
+  </property>
+  <property>
+    <name>hbase.unsafe.stream.capability.enforce</name>
+    <value>false</value>
+  </property>
+
+  <property>
+<name>hbase.rootdir</name>
+<value>file:///home/hdoop/hbase</value>
+</property>
+
+<property>
+<name>hbase.zookeeper.property.dataDir</name>
+<value>/home/hdoop/zookeeper</value>
+</property>
+
+
+  
+
+nano hbase-2.4.17/conf/hbase-env.sh
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+start-all.sh
+start-hbase.sh
+
+  
+hbase shell
