@@ -132,9 +132,17 @@ sudo nano $HADOOP_HOME/etc/hadoop/yarn-site.xml
 
 Launching Hadoop
 ==================================
+cd dfsdata/
+mkdir datanode
+mkdir namenode
+chmod 777 datanode/
+chmod 777 namenode/
+
+rm -Rf /tmp/hadoop-yarn-hdoop/
+
 hdfs namenode -format
 
 
-./start-dfs.sh
+./start-dzll.sh
 
 try to move a local file to hdfs by the method shown in video
