@@ -143,6 +143,6 @@ rm -Rf /tmp/hadoop-yarn-hdoop/
 hdfs namenode -format
 
 
-./start-dzll.sh
+./start-all.sh
 
 try to move a local file to hdfs by the method shown in video
